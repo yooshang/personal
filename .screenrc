@@ -1,0 +1,10 @@
+#ihardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y} %m/%d %c:%s "
+
+
+# caption always '%{=b cw}%-w%{=rb db}%>%n %t%{-}%+w%{-b}%< %{= kG}%-=%D %c%{-}'
+shelltitle '$ |bash'
+
+escape ^L^L
+escape ^Ll #Instead of control-a

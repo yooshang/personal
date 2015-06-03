@@ -1,0 +1,22 @@
+[http]  
+        sslVerify = false
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  b = branch
+  cfg = config
+  r = remote
+  m = merge
+  pl = pull
+  ps = push
+  l = log
+  sb = show-branch
+  glog = log --graph --pretty=oneline --abbrev-commit --color --decorate
+
+[color]
+  ui = auto
+
+[user]
+	email = fulianjie@bovophone.com
+	name = flj
