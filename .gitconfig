@@ -18,5 +18,10 @@
   ui = auto
 
 [user]
-	email = fulianjie@bovophone.com
-	name = flj
+	email = flj10@163.com
+	name = Yoo
+[core]
+    editor = vim
+
+[push]
+    default = simple
