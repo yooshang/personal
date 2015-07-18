@@ -59,6 +59,17 @@ scroll-conservatively 10000)
 
 (global-font-lock-mode 1)               ; 开启语法高亮。
 
+;; 包自动加载
+;; more package
+(require 'package)
+(add-to-list 'package-archives'
+             ("elpa" . "http://tromey.com/elpa/") t)
+(add-to-list 'package-archives'
+             ("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives'
+             ("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
 (add-to-list 'load-path "~/emacs/lisp_ext")
 (autoload 'css-mode "css-mode" "CSS editing mode" t)
 (setq auto-mode-alist
@@ -73,6 +84,7 @@ scroll-conservatively 10000)
               auto-mode-alist))
 
 
+;; add js2-mode
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
@@ -90,8 +102,15 @@ scroll-conservatively 10000)
 
 (add-hook 'php-mode-user-hook 'turn-on-font-lock)
 
-;;tab
+;; 默认不加载indent-tabs-mode
 (setq-default indent-tabs-mode  nil)
+
+;; 保存文件前执行一次whitespace-cleanup
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; 如果是打开makefile文件，则开启indent-tabs-mode，因为whitespace-cleanup中会用到这个
+(add-hook 'makefile-mode-hook 'indent-tabs-mode)
+
 ;;(setq php-manual-path "/usr/share/doc/php-manual/en/html/")
 
 ;;mustache
@@ -370,3 +389,20 @@ that was stored with ska-point-to-register."
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
+
+;; rainbow-mode
+(require 'rainbow-mode)
+
+(defun concat-symbol (&rest lst)
+  (intern (apply 'concat (mapcar (lambda(x)(if (symbolp x) (symbol-name x) x)) lst))))
+
+(dolist (hook
+         '(css
+           html
+           sass
+           ))
+  (add-hook
+   (concat-symbol hook '-mode-hook)
+   'rainbow-turn-on))
+;; (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
+;; (add-hook hook 'rainbow-turn-on))
