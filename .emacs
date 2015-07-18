@@ -1,4 +1,3 @@
-
 (column-number-mode t);显示列号
 
 ;;设置tab为4个空格的宽度
@@ -81,8 +80,8 @@ scroll-conservatively 10000)
 (add-hook 'after-init-hook 'session-initialize)
 
 
-;;(load "desktop") 
-;;(desktop-load-default) 
+;;(load "desktop")
+;;(desktop-load-default)
 ;;(desktop-read)
 
 
@@ -314,8 +313,8 @@ scroll-conservatively 10000)
 ;(global-set-key (kbd "C-x C-m") 'ska-point-to-register)
 ;(global-set-key (kbd "C-c <right>") 'ska-jump-to-register)
 (defun ska-point-to-register()
-  "Store cursorposition _fast_ in a register. 
-Use ska-jump-to-register to jump back to the stored 
+  "Store cursorposition _fast_ in a register.
+Use ska-jump-to-register to jump back to the stored
 position."
   (interactive)
   (setq zmacs-region-stays t)
@@ -357,8 +356,17 @@ that was stored with ska-point-to-register."
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
 
-(global-set-key (kbd "C-t") 'set-mark-command) 
+(global-set-key (kbd "C-t") 'set-mark-command)
 
 ;; key bindings
 (setq mac-option-modifier 'alt)
 (setq mac-command-modifier 'meta)
+
+;; https://github.com/fgallina/multi-web-mode
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(multi-web-global-mode 1)
